@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://invertagent.com/schemas/capability-catalog-v0.2.json",
+  "title": "INVERT Capability Catalog v0.2",
+  "type": "object",
+  "required": ["name", "canonical_url", "updated_at", "capabilities"],
+  "properties": {
+    "name": { "type": "string" },
+    "canonical_url": { "type": "string", "format": "uri" },
+    "updated_at": { "type": "string", "format": "date" },
+    "status_note": { "type": "string" },
+    "operator": { "type": "object" },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "name",
+          "status",
+          "canonical_url",
+          "user_job"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" },
+          "name": { "type": "string" },
+          "status": {
+            "enum": [
+              "planned",
+              "research_preview",
+              "experimental",
+              "beta",
+              "live",
+              "retired"
+            ]
+          },
+          "canonical_url": { "type": "string", "format": "uri" },
+          "human_url": { "type": "string", "format": "uri" },
+          "user_job": { "type": "string" },
+          "public_interface": {
+            "type": ["object", "null"]
+          }
+        }
+      }
+    }
+  }
+}

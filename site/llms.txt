@@ -1,0 +1,37 @@
+# INVERT
+
+> INVERT is a research and product brand helping self-directed investors build investment judgment that compounds with every decision.
+
+Canonical website: https://invertagent.com/
+Chinese website: https://invertagent.com/zh/
+Operator: Rebecca (independent developer)
+Contact: privacy@invertagent.com
+Updated: 2026-08-01
+
+## Core pages
+
+- [Home](https://invertagent.com/): Brand purpose, north star, flagship product and current publishing routes.
+- [Products](https://invertagent.com/products/): INVERT App, Foresight Loop and Morning Brief with explicit status.
+- [INVERT Journal](https://invertagent.com/journal/): Selected investment thinking, AI-native practice and product-building notes.
+- [Morning Brief](https://invertagent.com/projects/morning-brief/): Open-source, self-hosted workflow with requirements and installation instructions.
+- [For Agents](https://invertagent.com/agents/): Capability model, public contracts and current catalog.
+- [About](https://invertagent.com/about/): Mission, vision, north star, research disciplines and operator.
+
+## Machine-readable resources
+
+- [Capability catalog](https://invertagent.com/capabilities/index.json)
+- [Morning Brief project record](https://invertagent.com/projects/morning-brief.json)
+- [Morning Brief source](https://github.com/dreamybecca-coder/invert-morning-brief)
+- [Morning Brief Skill specification](https://github.com/dreamybecca-coder/invert-morning-brief/blob/main/SKILL.md)
+- [Robots policy](https://invertagent.com/robots.txt)
+- [Sitemap](https://invertagent.com/sitemap.xml)
+
+## Current truth
+
+- No public INVERT API or MCP endpoint is live today.
+- INVERT App is a private alpha, not a public self-serve product.
+- Morning Brief is public source code for a self-hosted workflow, not a hosted API or one-click plugin.
+- Planned capabilities are research candidates, not availability claims.
+- INVERT is not a broker, fund, registered investment adviser or automated trading service.
+- Public materials are research and educational information, not individualized investment advice.
+- Search and user-request crawlers are allowed. GPTBot and ClaudeBot are disallowed for training.

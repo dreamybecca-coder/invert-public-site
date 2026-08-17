@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://invertagent.com/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/zh/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/products/</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/products/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/products/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/zh/products/</loc><lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/products/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/products/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/journal/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/journal/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/journal/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/zh/journal/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/journal/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/journal/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/agents/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/agents/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/agents/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/zh/agents/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/agents/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/agents/" />
+  </url>
+  <url><loc>https://invertagent.com/projects/morning-brief/</loc><lastmod>2026-08-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://invertagent.com/zh/projects/morning-brief/</loc><lastmod>2026-08-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://invertagent.com/about/</loc><lastmod>2026-08-01</lastmod><priority>0.6</priority></url>
+  <url><loc>https://invertagent.com/zh/about/</loc><lastmod>2026-08-01</lastmod><priority>0.6</priority></url>
+  <url><loc>https://invertagent.com/privacy/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/terms/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/contact/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/account-data/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/zh/privacy/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/zh/terms/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/zh/contact/</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://invertagent.com/zh/account-data/</loc><lastmod>2026-08-01</lastmod></url>
+</urlset>

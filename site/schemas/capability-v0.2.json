@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://invertagent.com/schemas/capability-v0.2.json",
+  "title": "INVERT Capability v0.2",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "name",
+    "canonical_url",
+    "status",
+    "updated_at",
+    "discovery_contract",
+    "trust_contract",
+    "invocation_contract"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "version": { "type": "string" },
+    "name": { "type": "string" },
+    "summary": { "type": "string" },
+    "canonical_url": { "type": "string", "format": "uri" },
+    "human_url": { "type": "string", "format": "uri" },
+    "status": {
+      "enum": [
+        "planned",
+        "research_preview",
+        "experimental",
+        "beta",
+        "live",
+        "retired"
+      ]
+    },
+    "updated_at": { "type": "string", "format": "date" },
+    "discovery_contract": {
+      "type": "object",
+      "required": ["user_job", "use_when", "do_not_use_when", "languages"]
+    },
+    "trust_contract": {
+      "type": "object"
+    },
+    "invocation_contract": {
+      "type": ["object", "null"]
+    },
+    "availability_note": { "type": "string" }
+  }
+}

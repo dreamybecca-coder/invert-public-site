@@ -1,0 +1,34 @@
+{
+  "$schema": "https://invertagent.com/schemas/capability-catalog-v0.2.json",
+  "name": "INVERT Capability Catalog",
+  "canonical_url": "https://invertagent.com/agents/",
+  "updated_at": "2026-07-30",
+  "status_note": "Catalog preview. No public API or MCP endpoint is live today.",
+  "operator": {
+    "name": "Rebecca",
+    "role": "independent developer",
+    "contact": "privacy@invertagent.com"
+  },
+  "capabilities": [
+    {
+      "id": "thesis.red_team",
+      "version": "0.0-research",
+      "name": "Challenge an existing investment thesis",
+      "status": "planned",
+      "canonical_url": "https://invertagent.com/capabilities/thesis.red_team.json",
+      "human_url": "https://invertagent.com/agents/#thesis-red-team",
+      "user_job": "Identify disconfirming evidence, hidden assumptions, key unknowns, invalidation conditions and next verification steps for an existing investment thesis.",
+      "public_interface": null
+    },
+    {
+      "id": "evidence.pack",
+      "version": "0.0-research",
+      "name": "Assemble a traceable evidence packet",
+      "status": "planned",
+      "canonical_url": "https://invertagent.com/capabilities/evidence.pack.json",
+      "human_url": "https://invertagent.com/agents/#evidence-pack",
+      "user_job": "Organize a research question around entities, sources, time, known facts, interpretations, gaps and usage boundaries.",
+      "public_interface": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "morning-brief",
+  "name": "INVERT Morning Brief",
+  "status": "open-source",
+  "delivery": "self-hosted",
+  "description": "A Python workflow that filters daily market and AI industry information into Telegram and Obsidian outputs.",
+  "canonical_url": "https://invertagent.com/projects/morning-brief/",
+  "repository": "https://github.com/dreamybecca-coder/invert-morning-brief",
+  "installation_guide": "https://github.com/dreamybecca-coder/invert-morning-brief#快速开始",
+  "skill_specification": "https://github.com/dreamybecca-coder/invert-morning-brief/blob/main/SKILL.md",
+  "license": "MIT",
+  "runtime": "Python 3.10+",
+  "requirements": [
+    "Kimi or Anthropic API key",
+    "Telegram bot token and chat IDs",
+    "Writable Obsidian vault path"
+  ],
+  "hosted_api": null,
+  "one_click_plugin": false,
+  "investment_advice": false,
+  "updated_at": "2026-07-31"
+}

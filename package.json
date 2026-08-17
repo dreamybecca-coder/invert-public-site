@@ -1,0 +1,11 @@
+{
+  "name": "invertagent-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export:preview": "BASE_PATH=/invertagent-pages node scripts/export-static.mjs",
+    "export:production": "BASE_PATH= node scripts/export-static.mjs",
+    "verify": "node scripts/verify-static.mjs"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://invertagent.com/schemas/capability-v0.2.json",
+  "id": "evidence.pack",
+  "version": "0.0-research",
+  "name": "Assemble a traceable evidence packet",
+  "summary": "A planned research capability for organizing source-aware evidence around a defined question.",
+  "canonical_url": "https://invertagent.com/capabilities/evidence.pack.json",
+  "human_url": "https://invertagent.com/agents/#evidence-pack",
+  "status": "planned",
+  "updated_at": "2026-07-30",
+  "discovery_contract": {
+    "user_job": "Organize a research question around entities, sources, time, known facts, interpretations, gaps and usage boundaries.",
+    "use_when": [
+      "A person or agent needs a source-aware starting point for further analysis.",
+      "The research question and time context can be defined."
+    ],
+    "do_not_use_when": [
+      "The request requires data that INVERT has no right to display or redistribute.",
+      "The user expects a complete investment decision rather than an evidence set."
+    ],
+    "markets": [],
+    "languages": ["en", "zh-CN"]
+  },
+  "trust_contract": {
+    "methodology_url": "https://invertagent.com/research/",
+    "evaluation_status": "not_publicly_validated",
+    "known_limitations": [
+      "Field-level data rights are not yet locked.",
+      "Freshness and source coverage targets are not yet published.",
+      "No public evaluation set has been released."
+    ]
+  },
+  "invocation_contract": null,
+  "availability_note": "No public API or MCP endpoint is available."
+}

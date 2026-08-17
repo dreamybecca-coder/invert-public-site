@@ -1,0 +1,36 @@
+{
+  "$schema": "https://invertagent.com/schemas/capability-v0.2.json",
+  "id": "thesis.red_team",
+  "version": "0.0-research",
+  "name": "Challenge an existing investment thesis",
+  "summary": "A planned research capability for adversarial review of an existing investment thesis.",
+  "canonical_url": "https://invertagent.com/capabilities/thesis.red_team.json",
+  "human_url": "https://invertagent.com/agents/#thesis-red-team",
+  "status": "planned",
+  "updated_at": "2026-07-30",
+  "discovery_contract": {
+    "user_job": "Identify disconfirming evidence, hidden assumptions, key unknowns, invalidation conditions and next verification steps for an existing investment thesis.",
+    "use_when": [
+      "An investment thesis already exists.",
+      "The user wants an adversarial review rather than confirmation."
+    ],
+    "do_not_use_when": [
+      "The request is for an unconditional buy or sell instruction.",
+      "The request requires personalized trade execution.",
+      "There is no thesis or decision context to review."
+    ],
+    "markets": [],
+    "languages": ["en", "zh-CN"]
+  },
+  "trust_contract": {
+    "methodology_url": "https://invertagent.com/research/",
+    "evaluation_status": "not_publicly_validated",
+    "known_limitations": [
+      "No public evaluation set has been released.",
+      "Coverage, data sources and operating rights are not yet locked.",
+      "The capability may produce generic counterarguments until differentiated performance is demonstrated."
+    ]
+  },
+  "invocation_contract": null,
+  "availability_note": "No public API or MCP endpoint is available."
+}
