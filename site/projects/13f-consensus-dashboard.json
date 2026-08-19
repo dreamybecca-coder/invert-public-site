@@ -1,0 +1,32 @@
+{
+  "name": "13F Consensus Dashboard",
+  "name_zh": "13F 机构共识看板",
+  "status": "public-dashboard",
+  "delivery": "public-static-dashboard",
+  "interface_language": "zh-CN",
+  "dashboard_url": "https://dreamybecca-coder.github.io/13f-consensus-dashboard/",
+  "github_url": "https://github.com/dreamybecca-coder/13f-consensus-dashboard",
+  "description": "A read-only dashboard that turns selected managers' reported U.S. long positions into an inspectable view of institutional overlap, concentration and quarter-over-quarter change.",
+  "intended_use": [
+    "Find securities repeatedly held across selected managers",
+    "Compare reported position changes across quarters",
+    "Choose candidates for deeper company, industry or thesis research"
+  ],
+  "data_sources": [
+    "SEC EDGAR Form 13F information-table XML",
+    "arkfunds.io mirror of ARK daily disclosures for the separate weekly context"
+  ],
+  "current_scope": {
+    "selected_managers": 11,
+    "quarters": 5,
+    "data_as_of": "2026-08-17"
+  },
+  "limitations": [
+    "13F filings are delayed after quarter end",
+    "13F does not represent a manager's complete portfolio or short positions",
+    "Historical disclosure is not a real-time capital-flow or trading signal"
+  ],
+  "public_source_pipeline": false,
+  "public_artifact": "Self-contained static HTML. Browser-delivered interface code and displayed data are inspectable.",
+  "investment_advice": false
+}

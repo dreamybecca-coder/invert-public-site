@@ -42,6 +42,7 @@ const publicRoutes = [
 const publicFiles = [
   "brand",
   "capabilities",
+  "products",
   "projects",
   "schemas",
   "llms.txt",
@@ -87,7 +88,7 @@ await writeFile(path.join(outputDir, "404.html"), notFoundHtml);
 await writeFile(path.join(outputDir, ".nojekyll"), "");
 await writeFile(
   path.join(outputDir, "deployment.json"),
-  `${JSON.stringify({ basePath, sourceCommit: "0bf961f60d4efff1a08d591f803778bb99c50a30" }, null, 2)}\n`
+  `${JSON.stringify({ basePath, sourceCommit: "e1d102c61fbebf528f203a04beb80a20ff9d70a5" }, null, 2)}\n`
 );
 
 console.log(`Exported ${publicRoutes.length} public routes to ${outputDir}`);

@@ -11,7 +11,9 @@ Updated: 2026-08-01
 ## Core pages
 
 - [Home](https://invertagent.com/): Brand purpose, north star, flagship product and current publishing routes.
-- [Products](https://invertagent.com/products/): INVERT App, Foresight Loop and Morning Brief with explicit status.
+- [Products](https://invertagent.com/products/): INVERT App, the public 13F Consensus Dashboard, Morning Brief and planned agent capabilities with explicit status and research boundaries.
+- [13F Consensus Dashboard](https://dreamybecca-coder.github.io/13f-consensus-dashboard/): A public, read-only view of selected managers' reported U.S. long positions, institutional overlap and quarter-over-quarter changes. 13F data is delayed and is not a real-time trading signal or a complete portfolio view.
+- [13F Dashboard machine-readable record](https://invertagent.com/projects/13f-consensus-dashboard.json): Status, delivery, sources, intended use and limitations.
 - [INVERT Journal](https://invertagent.com/journal/): Selected investment thinking, AI-native practice and product-building notes.
 - [Morning Brief](https://invertagent.com/projects/morning-brief/): Open-source, self-hosted workflow with requirements and installation instructions.
 - [For Agents](https://invertagent.com/agents/): Capability model, public contracts and current catalog.
