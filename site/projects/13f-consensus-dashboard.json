@@ -17,9 +17,9 @@
     "arkfunds.io mirror of ARK daily disclosures for the separate weekly context"
   ],
   "current_scope": {
-    "selected_managers": 11,
+    "selected_managers": 13,
     "quarters": 5,
-    "data_as_of": "2026-08-17"
+    "data_as_of": "2026-08-19"
   },
   "limitations": [
     "13F filings are delayed after quarter end",

@@ -86,9 +86,12 @@ await writeFile(stylesheetTarget, staticStylesheet);
 const notFoundHtml = makeNotFoundPage(basePath, stylesheetPath);
 await writeFile(path.join(outputDir, "404.html"), notFoundHtml);
 await writeFile(path.join(outputDir, ".nojekyll"), "");
+if (!basePath) {
+  await writeFile(path.join(outputDir, "CNAME"), "invertagent.com\n");
+}
 await writeFile(
   path.join(outputDir, "deployment.json"),
-  `${JSON.stringify({ basePath, sourceCommit: "ddf338791d99146da8900a8ce5022e3f68cccfa5" }, null, 2)}\n`
+  `${JSON.stringify({ basePath, sourceCommit: "877a811326f8155b0330492f68beb680e1c17a0a" }, null, 2)}\n`
 );
 
 console.log(`Exported ${publicRoutes.length} public routes to ${outputDir}`);
