@@ -1,13 +1,10 @@
 # Deployment boundary
 
-The GitHub Pages edition is a public-site preview only until Rebecca and the
-AUTH Group 3 control plane approve a production cutover.
+Rebecca approved an emergency public-site cutover on 2026-08-21 after the
+previous hosting security layer blocked legitimate mobile visitors.
 
-Until that approval, this repository must not:
+This repository must not:
 
-- bind `invertagent.com` or `www.invertagent.com` to GitHub Pages;
-- replace or disable the dynamic website serving `/auth/confirm/` and
-  `/auth/recovery/`;
 - change authentication callbacks, provider settings, redirect allowlists, or
   transactional email templates;
 - publish `/auth`, `/api`, `/studio`, `/admin`, secrets, or private source;

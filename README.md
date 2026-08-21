@@ -9,5 +9,5 @@ media uploads, API routes, environment files, and private source code.
 ## Hosting
 
 GitHub Pages deploys the contents of `site/` through the included workflow.
-The initial preview is built for `/invertagent-pages/`. Before the custom domain
-is switched, regenerate the artifact with `npm run export:production`.
+The production artifact is rooted at `https://invertagent.com/` and contains
+only generated public files.

@@ -6,6 +6,7 @@
   "scripts": {
     "export:preview": "BASE_PATH=/invertagent-pages node scripts/export-static.mjs",
     "export:production": "BASE_PATH= node scripts/export-static.mjs",
+    "rebase:production": "node scripts/rebase-static.mjs",
     "verify": "node scripts/verify-static.mjs"
   }
 }
