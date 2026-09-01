@@ -1,5 +1,19 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import {
+  SOURCE_CANDIDATE_PUBLISHABLE_KEY,
+  assertDeployablePublishableKey,
+} from "./auth-callback-artifact.mjs";
+
+const argumentsList = process.argv.slice(2);
+const sourceCandidateMode = argumentsList.length === 1 && argumentsList[0] === "--source-candidate";
+if (argumentsList.length > 0 && !sourceCandidateMode) {
+  throw new Error("Unknown static verification mode.");
+}
+const expectedPublishableKey = sourceCandidateMode
+  ? SOURCE_CANDIDATE_PUBLISHABLE_KEY
+  : process.env.NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY ?? "";
+if (!sourceCandidateMode) assertDeployablePublishableKey(expectedPublishableKey);
 
 const root = path.resolve("site");
 const files = await walk(root);
@@ -110,7 +124,11 @@ function assertAuthDocument(html, relative) {
     throw new Error(`AUTH meta CSP is missing, broad, or overclaims frame controls in ${relative}.`);
   }
   const publicKey = html.match(/<meta name="invert-auth-publishable-key" content="([^"]+)">/i)?.[1] ?? "";
-  if (!/^sb_publishable_[A-Za-z0-9._-]+$/.test(publicKey) || /service_role|sb_secret_/i.test(publicKey)) {
+  if (
+    !/^sb_publishable_[A-Za-z0-9._-]+$/.test(publicKey) ||
+    /service_role|sb_secret_/i.test(publicKey) ||
+    publicKey !== expectedPublishableKey
+  ) {
     throw new Error(`AUTH public config is missing or elevated in ${relative}.`);
   }
   if (/token_hash=[^&"<]+|access_token=|refresh_token=/i.test(html)) {

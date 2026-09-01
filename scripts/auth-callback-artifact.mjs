@@ -5,6 +5,9 @@ import { EXPECTED_SUPABASE_PUBLIC_ORIGIN } from "../src/auth-callback-runtime.js
 
 export { EXPECTED_SUPABASE_PUBLIC_ORIGIN };
 
+export const SOURCE_CANDIDATE_PUBLISHABLE_KEY =
+  "sb_publishable_source_candidate_placeholder";
+
 export const authCallbackRoutes = [
   { route: "/auth/confirm/", locale: "en", purpose: "email" },
   { route: "/auth/recovery/", locale: "en", purpose: "recovery" },
@@ -37,6 +40,17 @@ export async function writeAuthCallbackArtifact({
       stylesheetPath,
       publishableKey,
     }));
+  }
+}
+
+export function assertDeployablePublishableKey(publishableKey) {
+  try {
+    validatePublicConfig(publishableKey);
+  } catch {
+    throw new Error("An approved production publishable key is required for AUTH export.");
+  }
+  if (/placeholder|synthetic|fixture|example|dummy|fake|test/i.test(publishableKey)) {
+    throw new Error("An approved production publishable key is required for AUTH export.");
   }
 }
 

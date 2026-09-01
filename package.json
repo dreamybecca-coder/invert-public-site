@@ -6,8 +6,10 @@
   "scripts": {
     "export:preview": "BASE_PATH=/invertagent-pages node scripts/export-static.mjs",
     "export:production": "BASE_PATH= node scripts/export-static.mjs",
+    "export:auth-production": "node scripts/export-auth-production.mjs",
     "rebase:production": "node scripts/rebase-static.mjs",
     "verify": "node scripts/verify-static.mjs",
+    "verify:source": "node scripts/verify-static.mjs --source-candidate",
     "test": "node --test tests/*.test.mjs"
   }
 }

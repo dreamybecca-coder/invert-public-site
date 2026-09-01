@@ -25,6 +25,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Regenerate production AUTH callbacks
+        env:
+          NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run export:auth-production
+      - name: Verify deployable static site
+        env:
+          NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run verify
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:

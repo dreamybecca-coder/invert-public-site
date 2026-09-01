@@ -17,6 +17,13 @@ Supabase public project origin, and a build-time `sb_publishable_*` public key.
 They must include meta referrer `no-referrer`, robots `noindex`, and the narrow
 meta CSP enforced by the exporter and verifier.
 
+Committed callback HTML is a deliberately non-deployable source fixture. Every
+GitHub Pages upload path must first regenerate the four callback documents from
+the approved environment-scoped public key and then run strict verification.
+Missing, mismatched, synthetic, fixture, test, or placeholder public config must
+fail before `upload-pages-artifact`; `verify:source` is review-only evidence and
+must never be used as a deployment gate.
+
 This repository must not:
 
 - change provider settings, redirect allowlists, or transactional email

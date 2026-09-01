@@ -15,7 +15,7 @@ import {
 
 const repositoryRoot = path.resolve(new URL("..", import.meta.url).pathname);
 const sourceSite = path.join(repositoryRoot, "site");
-const syntheticKey = "sb_publishable_synthetic_pages_key";
+const syntheticKey = "sb_publishable_ABCDEF0123456789ReviewerOnly";
 
 test("AUTH exporter adds only four routes and one runtime without changing public artifacts", async () => {
   const temporaryRoot = await mkdtemp(path.join(tmpdir(), "invert-pages-auth-"));
@@ -49,7 +49,14 @@ test("AUTH exporter adds only four routes and one runtime without changing publi
     const verification = spawnSync(
       process.execPath,
       [path.join(repositoryRoot, "scripts/verify-static.mjs")],
-      { cwd: temporaryRoot, encoding: "utf8" },
+      {
+        cwd: temporaryRoot,
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY: syntheticKey,
+        },
+      },
     );
     assert.equal(verification.status, 0, `${verification.stdout}\n${verification.stderr}`);
 
