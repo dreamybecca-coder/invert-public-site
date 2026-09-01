@@ -1,10 +1,13 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { authCallbackRoutes, writeAuthCallbackArtifact } from "./auth-callback-artifact.mjs";
 
 const sourceDir = process.env.SOURCE_DIR ?? "/Users/rebecca/Documents/INVERT-WEBSITE-LOGOFIX";
 const serverOrigin = (process.env.SERVER_ORIGIN ?? "http://127.0.0.1:3300").replace(/\/$/, "");
 const basePath = normalizeBasePath(process.env.BASE_PATH ?? "/invertagent-pages");
 const outputDir = path.resolve("site");
+const authPublishableKey =
+  process.env.NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY ?? "";
 
 const publicRoutes = [
   "/",
@@ -82,6 +85,12 @@ const staticStylesheet = rewriteCssUrls(stylesheet, basePath);
 const stylesheetTarget = path.join(outputDir, stylesheetPath.slice(1));
 await mkdir(path.dirname(stylesheetTarget), { recursive: true });
 await writeFile(stylesheetTarget, staticStylesheet);
+await writeAuthCallbackArtifact({
+  outputDir,
+  basePath,
+  stylesheetPath,
+  publishableKey: authPublishableKey,
+});
 
 const notFoundHtml = makeNotFoundPage(basePath, stylesheetPath);
 await writeFile(path.join(outputDir, "404.html"), notFoundHtml);
@@ -94,7 +103,7 @@ await writeFile(
   `${JSON.stringify({ basePath, sourceCommit: "877a811326f8155b0330492f68beb680e1c17a0a" }, null, 2)}\n`
 );
 
-console.log(`Exported ${publicRoutes.length} public routes to ${outputDir}`);
+console.log(`Exported ${publicRoutes.length + authCallbackRoutes.length} public routes to ${outputDir}`);
 console.log(`Base path: ${basePath || "/"}`);
 
 function makeStaticHtml(input, prefix) {
