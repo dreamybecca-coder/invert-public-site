@@ -183,6 +183,30 @@ test("confirm cleans the URL on load and waits for a deliberate click", async ()
   assert.doesNotMatch(domText(page), new RegExp(token));
 });
 
+test("confirm treats an accepted provider response without a bearer session as success", async () => {
+  const token = "accepted-confirm-token";
+  const page = makePage({
+    purpose: "email",
+    hash: `#token_hash=${token}&type=email`,
+    pathname: "/auth/confirm/",
+  });
+  const calls = [];
+  const controller = bootAuthCallbackPage({
+    ...page,
+    fetchImpl: async (url) => {
+      calls.push(url);
+      return new Response(null, { status: 200 });
+    },
+  });
+
+  assert.equal(page.location.hash, "");
+  assert.equal(calls.length, 0);
+  await controller.confirmEmail();
+  assert.deepEqual(calls, [`${EXPECTED_SUPABASE_PUBLIC_ORIGIN}/auth/v1/verify`]);
+  assert.equal(page.nodes.get("auth-panel").className, "auth-panel auth-state-success");
+  assert.doesNotMatch(domText(page), new RegExp(token));
+});
+
 test("confirm uncertain failure, stale retry, and remount never re-dispatch a token", async () => {
   const token = "single-use-confirm-token";
   const page = makePage({

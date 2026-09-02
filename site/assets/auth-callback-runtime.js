@@ -130,6 +130,14 @@ async function readSession(response) {
   return { accessToken, refreshToken };
 }
 
+async function readOptionalSession(response) {
+  try {
+    return await readSession(response);
+  } catch {
+    return null;
+  }
+}
+
 export function createAuthProviderClient(inputConfig, options = {}) {
   const config = validateProviderConfig(inputConfig);
   const fetchImpl = options.fetchImpl ?? fetch;
@@ -159,12 +167,11 @@ export function createAuthProviderClient(inputConfig, options = {}) {
   }
 
   async function verify(tokenHash, purpose) {
-    const response = await request("/auth/v1/verify", {
+    return request("/auth/v1/verify", {
       method: "POST",
       headers: providerHeaders(config),
       body: JSON.stringify({ token_hash: tokenHash, type: purpose }),
     });
-    return readSession(response);
   }
 
   async function logout(accessToken, scope) {
@@ -175,8 +182,14 @@ export function createAuthProviderClient(inputConfig, options = {}) {
   }
 
   return {
-    verifyEmail: (tokenHash) => verify(tokenHash, "email"),
-    verifyRecovery: (tokenHash) => verify(tokenHash, "recovery"),
+    async verifyEmail(tokenHash) {
+      const response = await verify(tokenHash, "email");
+      return readOptionalSession(response);
+    },
+    async verifyRecovery(tokenHash) {
+      const response = await verify(tokenHash, "recovery");
+      return readSession(response);
+    },
     async updatePassword(accessToken, password) {
       await request("/auth/v1/user", {
         method: "PUT",
@@ -327,7 +340,7 @@ export function bootAuthCallbackPage({
     let session = null;
     try {
       session = await client.verifyEmail(dispatchedToken);
-      await client.logoutLocal(session.accessToken);
+      if (session) await client.logoutLocal(session.accessToken);
       session = null;
       if (active) render("success");
     } catch {
