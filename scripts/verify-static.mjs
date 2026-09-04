@@ -28,6 +28,8 @@ const authHtmlPaths = new Set([
 ]);
 const expectedAuthRuntime = `${basePath}/assets/auth-callback-runtime.js`;
 const expectedProviderOrigin = "https://gioalvawiuuvphzilavr.supabase.co";
+const expectedUmamiScriptSrc = "https://cloud.umami.is/script.js";
+const expectedUmamiWebsiteId = "bb43536b-1f94-46fd-9163-015f87c1d1ec";
 
 if (htmlFiles.length < 30) {
   throw new Error(`Expected at least 30 HTML pages, found ${htmlFiles.length}.`);
@@ -71,8 +73,16 @@ for (const file of htmlFiles) {
       throw new Error(`AUTH runtime is missing or not exact in ${path.relative(root, file)}.`);
     }
     assertAuthDocument(html, relative);
-  } else if (executableScripts.length > 0) {
-    throw new Error(`Runtime script remained in ${path.relative(root, file)}.`);
+    if (/cloud\.umami\.is|data-umami-event/i.test(html)) {
+      throw new Error(`Analytics leaked into AUTH document: ${relative}`);
+    }
+  } else {
+    if (
+      executableScripts.length !== 1 ||
+      !isApprovedUmamiScript(executableScripts[0][0])
+    ) {
+      throw new Error(`Public analytics script is missing or not exact in ${relative}.`);
+    }
   }
   const unexpectedRootPath = basePath
     ? new RegExp(`(?:href|src)="/(?!${escapeRegex(basePath.slice(1))}/|/)`)
@@ -90,6 +100,23 @@ for (const file of htmlFiles) {
       throw new Error(`Broken local reference in ${path.relative(root, file)}: ${reference}`);
     }
   }
+}
+
+function isApprovedUmamiScript(script) {
+  const contents = script
+    .replace(/^<script\b[^>]*>/i, "")
+    .replace(/<\/script>$/i, "")
+    .trim();
+  return (
+    contents === "" &&
+    script.includes(`src="${expectedUmamiScriptSrc}"`) &&
+    script.includes(`data-website-id="${expectedUmamiWebsiteId}"`) &&
+    script.includes('data-domains="invertagent.com"') &&
+    script.includes('data-exclude-search="true"') &&
+    script.includes('data-exclude-hash="true"') &&
+    script.includes('data-do-not-track="true"') &&
+    !/data-auto-track|data-performance|data-before-send/i.test(script)
+  );
 }
 
 const runtimePath = path.join(root, "assets/auth-callback-runtime.js");

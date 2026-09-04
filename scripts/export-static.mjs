@@ -13,6 +13,8 @@ const outputDir = path.resolve("site");
 const authPublishableKey =
   process.env.NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY ?? "";
 assertDeployablePublishableKey(authPublishableKey);
+const umamiScriptSrc = "https://cloud.umami.is/script.js";
+const umamiWebsiteId = "bb43536b-1f94-46fd-9163-015f87c1d1ec";
 
 const publicRoutes = [
   "/",
@@ -105,7 +107,7 @@ if (!basePath) {
 }
 await writeFile(
   path.join(outputDir, "deployment.json"),
-  `${JSON.stringify({ basePath, sourceCommit: "877a811326f8155b0330492f68beb680e1c17a0a" }, null, 2)}\n`
+  `${JSON.stringify({ basePath, sourceCommit: "f6c36acdd5ad25e819843951a1bfab9a1653fe00" }, null, 2)}\n`
 );
 
 console.log(`Exported ${publicRoutes.length + authCallbackRoutes.length} public routes to ${outputDir}`);
@@ -114,9 +116,10 @@ console.log(`Base path: ${basePath || "/"}`);
 function makeStaticHtml(input, prefix) {
   const end = input.indexOf("</html>");
   let html = end >= 0 ? input.slice(0, end + 7) : input;
-  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (script) =>
-    /type="application\/ld\+json"/i.test(script) ? script : ""
-  );
+  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (script) => {
+    if (/type="application\/ld\+json"/i.test(script)) return script;
+    return isApprovedUmamiScript(script) ? script : "";
+  });
   html = html.replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "");
   html = html.replace(/\sdata-rsc-css-href="[^"]*"/gi, "");
   html = html.replace(/\sdata-precedence="[^"]*"/gi, "");
@@ -124,6 +127,22 @@ function makeStaticHtml(input, prefix) {
     html = html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${prefix}/`);
   }
   return `${html}\n`;
+}
+
+function isApprovedUmamiScript(script) {
+  const contents = script
+    .replace(/^<script\b[^>]*>/i, "")
+    .replace(/<\/script>$/i, "")
+    .trim();
+  return (
+    contents === "" &&
+    script.includes(`src="${umamiScriptSrc}"`) &&
+    script.includes(`data-website-id="${umamiWebsiteId}"`) &&
+    script.includes('data-domains="invertagent.com"') &&
+    script.includes('data-exclude-search="true"') &&
+    script.includes('data-exclude-hash="true"') &&
+    script.includes('data-do-not-track="true"')
+  );
 }
 
 function rewriteCssUrls(css, prefix) {
@@ -145,6 +164,7 @@ function makeNotFoundPage(prefix, cssPath) {
   <meta name="robots" content="noindex">
   <title>Page not found | INVERT</title>
   <link rel="stylesheet" href="${css}">
+  <script defer src="${umamiScriptSrc}" data-website-id="${umamiWebsiteId}" data-domains="invertagent.com" data-exclude-search="true" data-exclude-hash="true" data-do-not-track="true"></script>
 </head>
 <body>
   <main class="legal-shell">
