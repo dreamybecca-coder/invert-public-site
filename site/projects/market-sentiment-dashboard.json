@@ -1,0 +1,74 @@
+{
+  "name": "Macro Market Sentiment Monitor",
+  "name_zh": "宏观市场情绪监控看板",
+  "status": "public-dashboard",
+  "delivery": "public-static-dashboard",
+  "interface_language": "zh-CN",
+  "dashboard_url": "https://dreamybecca-coder.github.io/market-sentiment-dashboard/",
+  "github_url": "https://github.com/dreamybecca-coder/market-sentiment-dashboard",
+  "description": "A layered, read-only view of U.S. equity risk appetite, long-duration risk pressure and slower macro leading indicators.",
+  "intended_use": [
+    "Identify whether the market is in a fear, neutral or greed regime",
+    "Check whether credit, volatility, breadth or liquidity conditions are deteriorating",
+    "Decide when to hold, wait or move into deeper research"
+  ],
+  "indicator_layers": [
+    {
+      "name": "Sentiment spectrum",
+      "horizon": "days-to-weeks",
+      "inputs": [
+        "High-yield option-adjusted spread",
+        "VIX volatility",
+        "Total put/call ratio",
+        "S&P 500 breadth above the 200-day moving average",
+        "S&P 500 momentum versus the 125-day moving average"
+      ]
+    },
+    {
+      "name": "Long-duration risk overlays",
+      "horizon": "weeks-to-months",
+      "inputs": [
+        "10-year and 30-year real rates",
+        "Net liquidity: Federal Reserve balance sheet minus Treasury General Account minus reverse repo"
+      ]
+    },
+    {
+      "name": "Macro leading backdrop",
+      "horizon": "six-to-eighteen-months",
+      "inputs": [
+        "10-year minus 3-month Treasury yield curve",
+        "Four-week average of initial unemployment claims"
+      ]
+    },
+    {
+      "name": "Research context",
+      "horizon": "mixed",
+      "inputs": [
+        "Equity valuation",
+        "Investor flow notes",
+        "Upcoming market events",
+        "Daily research brief"
+      ]
+    }
+  ],
+  "data_sources": [
+    "FRED",
+    "Yahoo Finance",
+    "Manually maintained weekly inputs",
+    "INVERT Morning Brief"
+  ],
+  "data_cadence": {
+    "automated_market_data": "Trading days",
+    "manual_inputs": "Weekly",
+    "morning_brief": "Daily"
+  },
+  "limitations": [
+    "The dashboard combines indicators with different time horizons and data freshness",
+    "Some inputs are maintained manually and may be older than automated sources",
+    "The framework is centered on U.S. equities and long-duration risk assets",
+    "The composite is not a real-time quote, short-term market-timing model or individualized investment advice"
+  ],
+  "public_source_pipeline": false,
+  "public_artifact": "Self-contained static HTML with public JSON snapshots. Browser-delivered interface code and displayed data are inspectable; the private update pipeline is not included.",
+  "investment_advice": false
+}
