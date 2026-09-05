@@ -19,6 +19,7 @@ const umamiWebsiteId = "bb43536b-1f94-46fd-9163-015f87c1d1ec";
 const publicRoutes = [
   "/",
   "/products/",
+  "/download/",
   "/journal/",
   "/agents/",
   "/projects/",
@@ -34,6 +35,7 @@ const publicRoutes = [
   "/journal/why-forty-skills-should-not-become-forty-apis/",
   "/zh/",
   "/zh/products/",
+  "/zh/download/",
   "/zh/journal/",
   "/zh/agents/",
   "/zh/projects/",
@@ -107,7 +109,7 @@ if (!basePath) {
 }
 await writeFile(
   path.join(outputDir, "deployment.json"),
-  `${JSON.stringify({ basePath, sourceCommit: "d1ccf56afeb6effe6bfa94eae50e5b41f95ad6be" }, null, 2)}\n`
+  `${JSON.stringify({ basePath, sourceCommit: "aecdbe71577a913b5d42347014676a496af27330" }, null, 2)}\n`
 );
 
 console.log(`Exported ${publicRoutes.length + authCallbackRoutes.length} public routes to ${outputDir}`);
