@@ -107,7 +107,7 @@ if (!basePath) {
 }
 await writeFile(
   path.join(outputDir, "deployment.json"),
-  `${JSON.stringify({ basePath, sourceCommit: "f6c36acdd5ad25e819843951a1bfab9a1653fe00" }, null, 2)}\n`
+  `${JSON.stringify({ basePath, sourceCommit: "d1ccf56afeb6effe6bfa94eae50e5b41f95ad6be" }, null, 2)}\n`
 );
 
 console.log(`Exported ${publicRoutes.length + authCallbackRoutes.length} public routes to ${outputDir}`);

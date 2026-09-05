@@ -2,12 +2,12 @@
   "$schema": "https://invertagent.com/schemas/capability-catalog-v0.2.json",
   "name": "INVERT Capability Catalog",
   "canonical_url": "https://invertagent.com/agents/",
-  "updated_at": "2026-07-30",
+  "updated_at": "2026-09-05",
   "status_note": "Catalog preview. No public API or MCP endpoint is live today.",
   "operator": {
     "name": "Rebecca",
     "role": "independent developer",
-    "contact": "privacy@invertagent.com"
+    "contact": "invertagent@icloud.com"
   },
   "capabilities": [
     {

@@ -5,8 +5,8 @@
 Canonical website: https://invertagent.com/
 Chinese website: https://invertagent.com/zh/
 Operator: Rebecca (independent developer)
-Contact: privacy@invertagent.com
-Updated: 2026-08-01
+Contact: invertagent@icloud.com
+Updated: 2026-09-05
 
 ## Core pages
 
