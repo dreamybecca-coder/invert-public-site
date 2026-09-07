@@ -22,6 +22,16 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/products/" />
   </url>
   <url>
+    <loc>https://invertagent.com/download/</loc><lastmod>2026-09-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/download/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/download/" />
+  </url>
+  <url>
+    <loc>https://invertagent.com/zh/download/</loc><lastmod>2026-09-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/download/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/download/" />
+  </url>
+  <url>
     <loc>https://invertagent.com/journal/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://invertagent.com/journal/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://invertagent.com/zh/journal/" />
