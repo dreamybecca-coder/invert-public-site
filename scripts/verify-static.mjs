@@ -30,6 +30,15 @@ const expectedAuthRuntime = `${basePath}/assets/auth-callback-runtime.js`;
 const expectedProviderOrigin = "https://gioalvawiuuvphzilavr.supabase.co";
 const expectedUmamiScriptSrc = "https://cloud.umami.is/script.js";
 const expectedUmamiWebsiteId = "bb43536b-1f94-46fd-9163-015f87c1d1ec";
+const expectedProductionCname = "invertagent.com";
+const forbiddenDeploymentHosts = ["auth.invertagent.com", "chatgpt.site"];
+
+const productionCname = (await readFile(path.join(root, "CNAME"), "utf8")).trim();
+if (productionCname !== expectedProductionCname) {
+  throw new Error(
+    `Production CNAME must be exactly ${expectedProductionCname}; found ${productionCname || "empty"}.`,
+  );
+}
 
 if (htmlFiles.length < 30) {
   throw new Error(`Expected at least 30 HTML pages, found ${htmlFiles.length}.`);
@@ -46,6 +55,11 @@ for (const file of files) {
   }
   if (relative.includes("/auth/") && !authHtmlPaths.has(relative)) {
     throw new Error(`Unexpected AUTH path leaked into static artifact: ${relative}`);
+  }
+  const normalizedContents = (await readFile(file)).toString("latin1").toLowerCase();
+  const forbiddenHost = forbiddenDeploymentHosts.find((host) => normalizedContents.includes(host));
+  if (forbiddenHost) {
+    throw new Error(`Forbidden deployment host ${forbiddenHost} leaked into ${relative}.`);
   }
 }
 

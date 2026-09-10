@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { cp, mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
+import { cp, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
@@ -120,6 +120,60 @@ test("push-main and manual dispatch share regeneration and strict verification b
   assert.equal(workflow.match(/upload-pages-artifact@/g)?.length, 1);
   assert.equal(workflow.match(/NEXT_PUBLIC_INVERT_AUTH_SUPABASE_PUBLISHABLE_KEY: \$\{\{ vars\./g)?.length, 2);
   assert.doesNotMatch(workflow, /verify:source/);
+});
+
+test("deployment verifier rejects a non-apex CNAME and forbidden hosting authorities", async () => {
+  for (const mutation of [
+    { file: "CNAME", contents: "auth.invertagent.com\n", error: /CNAME must be exactly/ },
+    {
+      file: "index.html",
+      contents: "<!-- https://auth.invertagent.com/auth/confirm/ -->\n",
+      error: /Forbidden deployment host auth\.invertagent\.com/,
+    },
+    {
+      file: "index.html",
+      contents: "<!-- https://custom-domains.chatgpt.site/ -->\n",
+      error: /Forbidden deployment host chatgpt\.site/,
+    },
+    {
+      file: "index.html",
+      contents: "<!-- https://AUTH.INVERTAGENT.COM/auth/confirm/ -->\n",
+      error: /Forbidden deployment host auth\.invertagent\.com/,
+    },
+    {
+      file: "index.html",
+      contents: "<!-- https://Custom-Domains.ChatGPT.Site/ -->\n",
+      error: /Forbidden deployment host chatgpt\.site/,
+    },
+    {
+      file: "assets/redirect.mjs",
+      contents: "export const target = 'https://AUTH.INVERTAGENT.COM/auth/confirm/';\n",
+      error: /Forbidden deployment host auth\.invertagent\.com/,
+      newFile: true,
+    },
+  ]) {
+    const temporaryRoot = await mkdtemp(path.join(tmpdir(), "invert-pages-topology-gate-"));
+    await cp(path.join(repositoryRoot, "site"), path.join(temporaryRoot, "site"), {
+      recursive: true,
+    });
+    try {
+      const target = path.join(temporaryRoot, "site", mutation.file);
+      const original = mutation.file === "CNAME" || mutation.newFile
+        ? ""
+        : await readFile(target, "utf8");
+      await writeFile(target, `${original}${mutation.contents}`);
+      const verification = runNode(
+        path.join(repositoryRoot, "scripts/verify-static.mjs"),
+        {},
+        ["--source-candidate"],
+        temporaryRoot,
+      );
+      assert.notEqual(verification.status, 0);
+      assert.match(verification.stderr, mutation.error);
+    } finally {
+      await rm(temporaryRoot, { recursive: true, force: true });
+    }
+  }
 });
 
 function runNode(script, environment = {}, argumentsList = [], cwd = repositoryRoot) {
