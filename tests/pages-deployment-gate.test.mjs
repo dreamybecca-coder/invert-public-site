@@ -176,6 +176,47 @@ test("deployment verifier rejects a non-apex CNAME and forbidden hosting authori
   }
 });
 
+test("every responsive navigation exposes the same language destination on mobile", async () => {
+  const siteRoot = path.join(repositoryRoot, "site");
+  const htmlFiles = (await walk(siteRoot)).filter((file) => file.endsWith(".html"));
+  let responsiveNavigationCount = 0;
+
+  for (const file of htmlFiles) {
+    const html = await readFile(file, "utf8");
+    if (!html.includes('class="mobile-menu"')) continue;
+    responsiveNavigationCount += 1;
+
+    const relative = path.relative(siteRoot, file);
+    const desktopLanguage = html.match(
+      /<a href="([^"]+)" class="language-link" aria-label="([^"]+)">([^<]+)<\/a>/,
+    );
+    const mobileMenu = html.match(
+      /<details class="mobile-menu">[\s\S]*?<nav aria-label="Mobile navigation">([\s\S]*?)<\/nav><\/details>/,
+    );
+    const mobileLanguage = mobileMenu?.[1].match(
+      /<a href="([^"]+)" class="mobile-language-link" aria-label="([^"]+)"><span>([^<]+)<\/span><strong>([^<]+)<\/strong><\/a>/,
+    );
+
+    assert.ok(desktopLanguage, `Desktop language switch is missing in ${relative}`);
+    assert.ok(mobileLanguage, `Mobile language switch is missing in ${relative}`);
+    assert.equal(mobileLanguage[1], desktopLanguage[1], relative);
+    assert.equal(mobileLanguage[2], desktopLanguage[2], relative);
+    assert.equal(mobileLanguage[4], desktopLanguage[3], relative);
+    assert.equal(
+      mobileLanguage[3],
+      desktopLanguage[3] === "中文" ? "Language" : "语言",
+      relative,
+    );
+  }
+
+  assert.equal(responsiveNavigationCount, 32);
+  const stylesheet = await readFile(
+    path.join(siteRoot, "assets/index-5S2uRJbO.css"),
+    "utf8",
+  );
+  assert.match(stylesheet, /\.mobile-menu nav \.mobile-language-link\{/);
+});
+
 function runNode(script, environment = {}, argumentsList = [], cwd = repositoryRoot) {
   return spawnSync(process.execPath, [script, ...argumentsList], {
     cwd,
